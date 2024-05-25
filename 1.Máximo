@@ -1,0 +1,18 @@
+lista = []
+maior = 0
+
+def maximo (lista,i,n):
+    global maior
+    if i == n:
+        return maior
+    
+    if lista[i]>maior:
+        maior = lista[i]
+
+    maximo(lista,i+1,n) 
+    
+    return maior
+
+lista = list(map(int,input().split()))
+max = maximo(lista,0, len(lista))
+print(max)

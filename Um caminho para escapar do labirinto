@@ -1,0 +1,45 @@
+from sys import stdin
+
+mapa = []
+ans = []
+xi,yi = -1,-1
+dx = [-1,1,0,0]
+dy = [0,0,-1,1]
+
+def percorre(mapa,x,y):
+    new_x,new_y
+
+    for i in range(4):
+        new_x = x+dx[i]
+        new_y = y+dy[i]
+
+        if(mapa[new_x][new_y]==" "):
+            passo = [new_x, new_y]
+            ans.append(passo)
+            percorre(mapa,new_x,new_y)
+
+        if(mapa[new_x,new_y]=="S"):
+            passo = [new_x, new_y]
+            ans.append(passo)
+            break
+
+for line in stdin:
+    line = list(line.strip())
+    if list[0] == " ":
+        break
+    mapa.append(line)
+    linha = len(mapa)-1
+
+    if xi==-1 and yi==-1:
+        for i in range(len(line)):
+            if mapa[linha][i] == "E":
+                xi = linha
+                yi = i
+                passo = [xi,yi]
+                ans.append(passo)
+
+percorre(xi,yi)
+
+for linha in ans:
+    
+    

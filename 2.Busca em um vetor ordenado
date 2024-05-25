@@ -1,0 +1,19 @@
+def busca(lista,l,r,x):
+    if(l>r):
+        return -1
+    
+    meio = (l+r)//2
+
+    if lista[meio] == x:
+        return meio
+    
+    if lista[meio]<x:
+        return busca(lista,meio+1,r,x)
+
+    if lista[meio]>x:
+        return busca(lista,l,meio-1,x)
+
+lista = list(map(int,input().split()))
+target = int(input())
+index = busca(lista,0,len(lista)-1,target)
+print(index)

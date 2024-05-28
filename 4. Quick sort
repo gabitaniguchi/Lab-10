@@ -1,0 +1,30 @@
+def particao(begin,end,pivo):
+    i = begin
+    for j in range(i+1,end+1):
+        if(lista[j] <= pivo):
+            i+=1
+            lista[i],lista[j] = lista[j],lista[i]
+    
+    lista[begin],lista[i] = lista[i],lista[begin]
+    return i
+
+def quicksort(begin,end):
+    if(begin>=end):
+        return 0
+
+    pivo = lista[begin]
+    index = particao(begin,end,pivo)
+
+    quicksort(begin, index-1)
+    quicksort(index+1,end)
+
+lista = []
+lista = list(map(int,input().split()))
+ans = quicksort(0,len(lista)-1)
+
+for i in range(len(lista)):
+    print(lista[i], end="")
+    if (i<len(lista)-1):
+        print(" ", end="")
+
+print()

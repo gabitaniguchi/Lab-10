@@ -1,0 +1,65 @@
+mapa = []
+direcao = [[1,0],[0,-1],[-1,0],[0,1]]
+#girar esquerda - anti-horário
+#girar direita - horário
+
+def langton(x,y,pos,n, end):
+    if (mapa[x][y]=="#"):
+        mapa[x][y] = "."
+        if pos=="B":
+            y+=1
+            pos = "LD"
+
+        elif pos=="C":
+            y-=1
+            pos = "LE"
+
+        elif pos=="LD":
+            x-=1
+            pos = "C"
+
+        elif pos =="LE":
+            x+=1
+            pos = "B"
+
+    elif (mapa[x][y]=="."):
+        mapa[x][y] = "#"
+        
+        if pos=="B":
+            y-=1
+            pos = "LE"
+
+        elif pos=="C":
+            y+=1
+            pos = "LD"
+
+        elif pos=="LD":
+            x+=1
+            pos = "B"
+
+        elif pos =="LE":
+            x-=1
+            pos = "C"
+   
+    n+=1
+
+    if(n!=end):
+        langton(x,y,pos,n,end)
+
+vezes, l, c = map(int, input().split())
+
+for i in range(l):
+    linha = list(map(str,input().strip()))
+    mapa.append(linha)
+
+xi = ((c+1)//2) - 1
+yi = ((l+1)//2) - 1
+
+pos = "B"
+langton(xi,yi,pos,0,vezes)
+
+for line in mapa:
+    for item in line:
+        print(item, end="")
+
+    print()

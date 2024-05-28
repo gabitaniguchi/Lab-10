@@ -5,23 +5,32 @@ ans = []
 xi,yi = -1,-1
 dx = [-1,1,0,0]
 dy = [0,0,-1,1]
+vis = {} #dicionario de visitado
 
 def percorre(mapa,x,y):
-    new_x,new_y
+    
+    vis[(x,y)] = 1
+    possivel = 0
 
     for i in range(4):
         new_x = x+dx[i]
         new_y = y+dy[i]
+        passo = [new_x, new_y]
 
-        if(mapa[new_x][new_y]==" "):
-            passo = [new_x, new_y]
-            ans.append(passo)
-            percorre(mapa,new_x,new_y)
+        if(new_x<0 or new_x>len(mapa)-1 or new_y<0 or new_y>len(mapa[0])-1):
+            continue
 
-        if(mapa[new_x,new_y]=="S"):
-            passo = [new_x, new_y]
+        if(mapa[new_x][new_y]==" " and vis.get((new_x,new_y),-1)!=1):
             ans.append(passo)
-            break
+            possivel = 1
+            return percorre(mapa,new_x,new_y)
+
+        if(mapa[new_x][new_y]=="S"):
+            ans.append(passo)
+            return 0
+
+        if(i==3 and possivel == 0):
+            ans.remove([x,y])
 
 for line in stdin:
     line = list(line.strip())
@@ -38,8 +47,7 @@ for line in stdin:
                 passo = [xi,yi]
                 ans.append(passo)
 
-percorre(xi,yi)
-
+percorre(mapa,xi,yi)
 for linha in ans:
-    
+    print(f"{linha[0]} {linha[1]}")
     
